@@ -1,0 +1,27 @@
+id, name, calories_lower_bound, calories_upper_bound, protein (g), fat (g), carbohydrates (g)
+0, background, 0, 0, 0, 0, 0
+1, vegetables | leafy_greens, 15, 35, 2, 0.3, 3
+2, vegetables | stem vegetables, 15, 40, 2, 0.2, 4
+3, vegetables | non-starchy roots, 30, 70, 1.5, 0.1, 12
+4, vegetables | other, 20, 100, 1, 0.5, 5
+5, fruits, 30, 90, 0.5, 0.2, 15
+6, protein | meat, 120, 250, 25, 8, 0
+7, protein | poultry, 100, 200, 20, 5, 0
+8, protein | seafood, 70, 150, 20, 2, 0
+9, protein | eggs, 140, 160, 13, 10, 1
+10, protein | beans/nuts, 120, 500, 20, 10, 30
+11, starches/grains | baked_goods, 250, 400, 8, 5, 50
+12, starches/grains | rice/grains/cereals, 100, 370, 7, 1, 75
+13, starches/grains | noodles/pasta, 85, 130, 5, 1.5, 25
+14, starches/grains | starchy vegetables, 70, 150, 2, 0.2, 17
+15, starches/grains | other, 100, 400, 8, 5, 50
+16, soups/stews, 45, 100, 3, 2, 10
+17, herbs/spices, 20, 400, 10, 5, 60
+18, dairy, 40, 150, 3, 3, 5
+19, snacks, 250, 500, 7, 25, 60
+20, sweets/desserts, 260, 450, 4, 15, 70
+21, beverages, 0, 60, 0, 0, 0-15 (depending on sugar content)
+22, fats/oils/sauces, 700, 900, 0, 100, 0
+23, food_containers, 0, 0, 0, 0, 0
+24, dining_tools, 0, 0, 0, 0, 0
+25, other_food, 100, 400, 8, 10, 50
