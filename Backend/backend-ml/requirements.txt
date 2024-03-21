@@ -9,5 +9,4 @@ wget
 wheel
 python-multipart
 urllib3==1.26.6
-
 pandas
