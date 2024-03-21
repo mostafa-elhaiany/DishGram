@@ -1,0 +1,55 @@
+[
+    {
+        "title": "Crispy Baked Wonton Chips",
+        "path":"Streamlit/Assets/Videos/video1.mp4",
+        "tags": ["Baked"]
+    },
+    {
+        "title": "Baked Mostaccioli with Meat and Cheese",
+        "path":"Streamlit/Assets/Videos/video2.mp4",
+        "tags": ["Baked"]
+
+    },
+    {
+        "title":"Sausage and Cheese Crescent Calzones",
+        "path":"Streamlit/Assets/Videos/video3.mp4",
+        "tags": []
+
+    },
+    {
+        "title":"Chilled Avocado Soup with Salmon",
+        "path":"Streamlit/Assets/Videos/video4.mp4",
+        "tags": []
+
+    },
+    {
+        "title":"Homemade Garden Vegetable Soup with Pasta",
+        "path":"Streamlit/Assets/Videos/video5.mp4",
+        "tags": ["Vegetarian"]
+
+    },
+    {
+        "title":"Croatian Vegetable-Cheese Musaka",
+        "path":"Streamlit/Assets/Videos/video6.mp4",
+        "tags": ["Vegetarian"]
+
+    },
+    {
+        "title":"Chinese Egg Rolls: Skins",
+        "path":"Streamlit/Assets/Videos/video7.mp4",
+        "tags": ["Vegetarian"]
+
+    },
+    {
+        "title": "Birthday cake",
+        "path":"Streamlit/Assets/Videos/video8.mp4",
+        "tags": ["Dessert", "Baked"]
+
+    },
+    {
+        "title": "Chocolate Cookies",
+        "path":"Streamlit/Assets/Videos/video9.mp4",
+        "tags": ["Dessert", "Baked"]
+
+    }
+]
