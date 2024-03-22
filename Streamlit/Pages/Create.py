@@ -1,17 +1,5 @@
 import requests, config, json
-
-def __get_nutritional_value(query):
-    key = config.RECIPE_API 
-    api_url = 'https://api.api-ninjas.com/v1/nutrition?query={}'.format(query)
-    response = requests.get(api_url, headers={'X-Api-Key': key})
-    return json.loads(response.text)
-
-def __get_recipe(query):
-    key = config.RECIPE_API 
-    api_url = 'https://api.api-ninjas.com/v1/recipe?query={}'.format(query)
-    response = requests.get(api_url, headers={'X-Api-Key': key})
-    return json.loads(response.text)
-
+from utils.Api import get_nutritional_value, get_recipe
 
 def json_to_markdown(json_data):
     markdown_text = ""
@@ -28,7 +16,7 @@ def draw_create(st):
     if(len(recipe)==0):
         st.write("please insert a search query")
     elif(len(recipe)!=0):
-        returned_json = __get_recipe(recipe)
+        returned_json = get_recipe(recipe)
         if(len(returned_json)==0):
             st.write("Unfortunatly we couldn't find anything. Are you sure you wrote it correclty?")
         else:
@@ -78,7 +66,7 @@ def draw_create(st):
             }            
             """)
             st.title("Nutritional Value")
-            nutrition = __get_nutritional_value(recipe)
+            nutrition = get_nutritional_value(recipe)
             if(len(nutrition)>0):
                 for item in nutrition:
                     st.code(item)
