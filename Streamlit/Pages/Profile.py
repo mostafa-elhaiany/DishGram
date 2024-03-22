@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import os, json
+from utils.Api import return_nutrients
 
 def generate_bar_plot(data,ylabel, title, color):
     fig = plt.figure(figsize=(10, 5))
@@ -43,15 +44,25 @@ def handle_images(st, user_json):
     # If image is uploaded, add it to the list and display
     upload_dir = "Streamlit/Assets/uploaded_images"
     if uploaded_file is not None:
+        bytes_object = uploaded_file.read()
         if not os.path.exists(upload_dir):
             os.makedirs(upload_dir)
         new_image_path = os.path.join(upload_dir, uploaded_file.name)
         with open(new_image_path, "wb") as f:
-            f.write(uploaded_file.read())
+            f.write(bytes_object)
 
         uploaded_images.append(new_image_path)
         st.success("Image uploaded successfully!")
-        print(uploaded_file)
+        nutrients = return_nutrients(bytes_object)
+        # st.json(nutrients)
+        calories = (nutrients["calories_lower_bound"])
+        protein = nutrients["estimated_protein_g"]
+        carbs = nutrients["estimated_carbohydrates_g"]
+        fats = nutrients["estimated_fat_g"]
+        
+
+
+
     # Display uploaded images
     if len(uploaded_images) > 0:
         st.write("### Uploaded Images:")

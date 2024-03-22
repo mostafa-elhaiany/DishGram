@@ -1,1 +1,14 @@
-{"posted_images": [], "calories": [], "today_calorie": 0, "meals": []}
+{
+    "posted_images": [], 
+    "calories": [1500, 2500], 
+    "today_calorie": 0, 
+    "waters":[2, 2.5],
+    "today_water":0,
+    "protiens":[50,45],
+    "today_protein":0,
+    "fats":[20,20],
+    "today_fat":0,
+    "carbs":[30,35],
+    "today_carbs":0,
+    "meals": []
+}

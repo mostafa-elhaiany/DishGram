@@ -29,7 +29,7 @@ import streamlit as st
 from utils.Auth import authenticate, name_exists, append_user
 
 from Components import Sidebar
-from Pages import Home, About, Create, Personalization, Ingredients, Profile, Recommend
+from Pages import Home, About, Create, Personalization, Ingredients, Profile, Recommend, Estimate
 
 def main():
     l_corner, title, _, r_corner= st.columns([6,1,6,1])
@@ -44,6 +44,8 @@ def main():
         page, tags = Sidebar.draw_sidebar(st)
         if page == "Profile":
             Profile.draw_profile(st)
+        elif page == "Estimate":
+            Estimate.draw_estimate(st)
         elif page == "Recommend":
             Recommend.draw_recommend(st)
         elif page == "Home":

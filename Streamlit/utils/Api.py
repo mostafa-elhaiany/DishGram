@@ -7,10 +7,11 @@ def return_categories():
     global categories
     response = requests.get(config.CATEGORIES_API)
     categories = response.json()
+    return categories
 
-def return_nutrients(image_file):
-    encoded_string = base64.b64encode(image_file.read())
-    payload ={"filename": image_file.name, "filedata": encoded_string}
+def return_nutrients(image_bytes):
+    encoded_string = base64.b64encode(image_bytes)
+    payload ={"filename": "temp.jpg", "filedata": encoded_string}
     response = requests.post(url=config.CALORIES_NUTRIENTS_API, data=payload) 
     return response.json()
 
