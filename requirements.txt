@@ -3,3 +3,4 @@ python-dotenv
 streamlit
 opencv-python
 graphviz
+matplotlib
