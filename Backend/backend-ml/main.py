@@ -1,4 +1,4 @@
-from fastapi import File, UploadFile, Request, FastAPI
+from fastapi import File, Form, UploadFile, Request, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
@@ -23,6 +23,8 @@ from PIL import Image
 import numpy as np
 import requests
 from io import BytesIO
+import base64
+import sys
 
 
 
@@ -54,21 +56,33 @@ m = hub.KerasLayer(
 
 @app.get("/")
 async def root():
-    return {"message": "Welcome to the Food Vision API!"}
+    headers = {
+        'Accept': 'text/plain',
+    }
+    try:
+        response = requests.get('https://icanhazdadjoke.com/', headers=headers)
+    except:
+        return JSONResponse({"message": "There was an error fetching the joke"},status_code=569)
+    return JSONResponse(content=response.json(), status_code=69)
 
-@app.get("/run-model/")
-async def run_model(file: UploadFile = File(...)):
+@app.post("/run-model/")
+async def run_model(filename: str = Form(...), filedata: str = Form(...)):
+    image_as_bytes = str.encode(filedata)  # convert string to bytes
+    img_recovered = base64.b64decode(image_as_bytes)
+    filename = "uploaded_" + filename + ".jpg"
     
     try:
-        contents = file.file.read()
-        with open(file.filename, 'wb') as f:
-            f.write(contents)
+        with open(filename,"wb") as f:
+            f.write(img_recovered)
     except Exception:
-        return {"message": "There was an error uploading the file"}
-    finally:
-        file.file.close()
+        return JSONResponse({"message": "There was an error uploading the file"},status_code=569)
+        
     print("File Uploaded")
-    image = Image.open(file.filename).resize((513, 513)).convert('RGB')
+    try:
+        image = Image.open(filename).resize((513, 513)).convert('RGB')
+    except:
+        return JSONResponse({"message": "There was an error processing the image"},status_code=542)
+   
     
     ret_vals = {}
     
@@ -81,7 +95,10 @@ async def run_model(file: UploadFile = File(...)):
     image = np.expand_dims(image, axis=0)
     image = image / 255.0  # Normalize the image data to the range [0, 1]
 
-    array = m(image).numpy()
+    try:
+        array = m(image).numpy()
+    except:
+        return JSONResponse({"message": "There was an error running the model"},status_code=543)
     #array = np.random.rand(513, 513, 26)
     
     print("Array Shape")
@@ -114,6 +131,39 @@ async def run_model(file: UploadFile = File(...)):
 @app.get("/categories/")
 def get_categories():
     return JSONResponse(content=food_categories)
+
+@app.post("/fridge/")
+def get_fridge(filename: str = Form(...), filedata: str = Form(...)):
+    image_as_bytes = str.encode(filedata)  # convert string to bytes
+    img_recovered = base64.b64decode(image_as_bytes)  # decode base64string
+    filename = "uploaded_" + filename + ".jpg"
+    
+    try:
+        with open(filename, "wb") as f:
+            f.write(img_recovered)
+    except Exception:
+        return JSONResponse({"message": "There was an error uploading the file"},status_code=569)
+    
+    headers = {
+        'Content-Type': 'application/x-www-form-urlencoded',
+    }
+
+    params = {
+        "confidence": 0.15,
+        'api_key': 'Nu74IoZ68utC9AuEd144',
+    }
+
+    data = image_as_bytes
+
+    try:
+        result = requests.post('https://detect.roboflow.com/smarterchef/5', params=params, headers=headers, data=data)
+    except:
+        return JSONResponse({"message": "There was an error processing the image"},status_code=542)
+    
+    result = result.json()
+      
+    return JSONResponse(content=result)
+
 
 if __name__ == "__main__":
     try:
